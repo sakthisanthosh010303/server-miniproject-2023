@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Sussy Bakas - Update Responder{% endblock %}
+
+{% block content %}
+<h2 class="text-center">Update Responder</h2>
+{% for error in form.email_id.errors %}
+<div class="alert alert-danger mx-auto text-center" role="alert" style="max-width: 500px;">
+  <h4>Error</h4><hr>
+  <div>{{ error }}</div>
+</div>
+{% endfor %}
+{% for error in form.phone.errors %}
+<div class="alert alert-danger mx-auto text-center" role="alert" style="max-width: 500px;">
+  <h4>Error</h4><hr>
+  <div>{{ error }}</div>
+</div>
+{% endfor %}
+<form
+  class="bg-light border rounded mx-auto p-4"
+  method="POST"
+  action="{{ url_for('update_responder_handle', guid=responder.guid) }}"
+  style="max-width: 600px;"
+>
+  {{ form.csrf_token }}
+  <div class="form-group">
+    <b>{{ form.first_name.label }}</b>
+    {{ form.first_name(size=20, class='form-control') }}
+  </div>
+  <div class="form-group">
+    <b>{{ form.last_name.label }}</b>
+    {{ form.last_name(size=20, class='form-control') }}
+  </div>
+  <div class="form-group">
+    <b>{{ form.email_id.label }}</b>
+    {{ form.email_id(size=20, class='form-control') }}
+  </div>
+  <div class="form-group">
+    <b>{{ form.phone.label }}</b>
+    {{ form.phone(size=20, class='form-control') }}
+  </div>
+  {{ form.submit(class='btn btn-warning') }}
+  <a class="btn btn-secondary text-light" href="{{ url_for('responders_handle') }}">Cancel</a>
+</form>
+{% endblock %}
